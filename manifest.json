@@ -1,0 +1,36 @@
+{
+  "applicationName":"VideoCreator",
+  "version": "0.0.1",
+  "entryPointComponent": "video-creator",
+  "description": "Create Videos",
+  "componentsDirPath": "web-components",
+  "components":[
+    {
+      "name": "video-creator",
+      "presenterClassName": "VideoCreator",
+      "type": "modals"
+    }
+  ],
+  "services": [
+    {
+      "serviceName": "RoutingService",
+      "servicePath": "services/RoutingService.js"
+    }
+  ],
+  "manager": {
+    "path": "manager.js",
+    "name": "Manager"
+  },
+  "plugins": {
+    "abstract": [],
+    "paragraph": [
+      {
+        "name": "Video Creator",
+        "componentName": "video-creator",
+        "icon": "/assets/icons/video.svg",
+        "presenterClassName": "VideoCreator"
+      }
+    ]
+  }
+}
+
