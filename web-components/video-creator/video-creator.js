@@ -6,7 +6,11 @@ export class VideoCreator {
     constructor(element, invalidate) {
         this.element = element;
         this.invalidate = invalidate;
-        let documentPresenter = document.querySelector("document-view-page").webSkelPresenter;
+        let documentPage = document.querySelector("document-view-page");
+        if(!documentPage){
+            return showApplicationError("Application not done yet", "use this as a plugin in paragraph");
+        }
+        let documentPresenter = documentPage.webSkelPresenter;
         let context = pluginUtils.getContext(this.element);
         this.paragraphId = context.paragraphId;
         this.paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
