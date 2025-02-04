@@ -2,7 +2,7 @@ import {executorTimer} from "../../../../../../../wallet/imports.js";
 import {videoUtils} from "../../../../../../../wallet/imports.js";
 const documentModule = require("assistos").loadModule("document", {});
 const spaceModule = require("assistos").loadModule("space", {});
-let blackScreen = `/applications/files/${assistOS.space.id}/VideoCreator/assets/images/black-screen.png`;
+let blackScreen = `/applications/files/${assistOS.space.id}/MultimediaCreator/assets/images/black-screen.png`;
 export class DocumentVideoPreview {
     constructor(element, invalidate) {
         this.element = element;

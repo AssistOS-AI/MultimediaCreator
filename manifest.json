@@ -1,5 +1,5 @@
 {
-    "applicationName": "VideoCreator",
+    "applicationName": "MultimediaCreator",
     "version": "0.0.1",
     "entryPointComponent": "video-creator",
     "description": "Create Videos",

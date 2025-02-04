@@ -2,7 +2,7 @@ import {RoutingService} from "./services/RoutingService.js";
 
 export class Manager {
     constructor() {
-        this.appName = "VideoCreator";
+        this.appName = "MultimediaCreator";
         this.services = new Map();
         this.services.set('RoutingService', new RoutingService());
     }

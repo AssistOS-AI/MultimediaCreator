@@ -364,7 +364,7 @@ export class ParagraphVideoPreview {
     }
 
     async setVideoThumbnail() {
-        let imageSrc = `/applications/files/${assistOS.space.id}/VideoCreator/assets/images/black-screen.png`;
+        let imageSrc = `/applications/files/${assistOS.space.id}/MultimediaCreator/assets/images/black-screen.png`;
         if (this.paragraph.commands.video) {
             if (this.paragraph.commands.video.thumbnailId) {
                 imageSrc = await spaceModule.getImageURL(this.paragraph.commands.video.thumbnailId);
