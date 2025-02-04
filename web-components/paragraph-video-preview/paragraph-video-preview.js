@@ -1,7 +1,6 @@
 import {executorTimer} from "../../../../../../../wallet/utils/utils.js";
 import {videoUtils} from "../../../../../../../wallet/imports.js";
 const spaceModule = require("assistos").loadModule("space", {});
-const applicationModule = require("assistos").loadModule("application", {});
 
 export class ParagraphVideoPreview {
     constructor(element, invalidate) {
@@ -12,7 +11,6 @@ export class ParagraphVideoPreview {
         this.chapter = paragraphPresenter.chapter;
         this.paragraph = paragraphPresenter.paragraph;
         this.commandsEditor = paragraphPresenter.commandsEditor;
-        this.commandsEditor.videoPresenter = this;
         this._document = paragraphPresenter._document;
         this.invalidate();
     }

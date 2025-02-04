@@ -30,11 +30,23 @@ export class ImageCreator{
         }
     }
     async insertImage(){
-        await this.commandsEditor.insertAttachmentCommand("image");
-        this.invalidate();
+        let imageId = await this.commandsEditor.insertAttachmentCommand("image");
+        if(imageId){
+            this.changeIconState("on");
+            this.invalidate();
+        }
     }
     async deleteImage() {
         await this.commandsEditor.deleteCommand("image");
+        this.changeIconState("off");
         this.invalidate();
+    }
+    changeIconState(state){
+        let pluginIcon = this.paragraphPresenter.element.querySelector(".plugin-circle.image-creator");
+        if(state === "on"){
+            pluginIcon.classList.add("highlight-attachment");
+        }else {
+            pluginIcon.classList.remove("highlight-attachment");
+        }
     }
 }

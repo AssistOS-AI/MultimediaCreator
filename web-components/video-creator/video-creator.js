@@ -147,11 +147,19 @@ export class VideoCreator {
             button.classList.add("hidden");
         }
     }
-
+    changeIconState(state){
+        let pluginIcon = this.paragraphPresenter.element.querySelector(".plugin-circle.video-creator");
+        if(state === "on"){
+            pluginIcon.classList.add("highlight-attachment");
+        }else {
+            pluginIcon.classList.remove("highlight-attachment");
+        }
+    }
     async insertVideo(){
         let videoId = await this.commandsEditor.insertAttachmentCommand("video");
         if(videoId){
             this.invalidate();
+            this.changeIconState("on");
         }
     }
     async deleteVideo(){
@@ -162,6 +170,7 @@ export class VideoCreator {
                 await this.insertVideoSource(commands);
             }
         }
+        this.changeIconState("off");
         this.invalidate();
     }
     async insertVideoSource(commands){

@@ -14,8 +14,8 @@ export class AudioCreator {
         let chapterId = context.chapterId;
         let chapter = this._document.chapters.find(chapter => chapter.id === chapterId);
         this.paragraphId = context.paragraphId;
-        let paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
-        this.commandsEditor = paragraphPresenter.commandsEditor;
+        this.paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
+        this.commandsEditor = this.paragraphPresenter.commandsEditor;
         this.paragraph = chapter.paragraphs.find(paragraph => paragraph.id === this.paragraphId);
         this.commands = this.paragraph.commands;
         this.invalidate(async () => {
@@ -189,11 +189,15 @@ export class AudioCreator {
         this.invalidate();
     }
     async insertAudio(){
-        await this.commandsEditor.insertAttachmentCommand("audio");
-        this.invalidate();
+        let audioId = await this.commandsEditor.insertAttachmentCommand("audio");
+        if(audioId){
+            this.changeIconState("on");
+            this.invalidate();
+        }
     }
     async deleteAudio(){
         await this.commandsEditor.deleteCommand("audio");
+        this.changeIconState("off");
         this.invalidate();
     }
     async deleteSpeech(){
@@ -219,5 +223,13 @@ export class AudioCreator {
         }
         await this.commandsEditor.insertSimpleCommand("silence", data);
         this.invalidate();
+    }
+    changeIconState(state){
+        let pluginIcon = this.paragraphPresenter.element.querySelector(".plugin-circle.audio-creator");
+        if(state === "on"){
+            pluginIcon.classList.add("highlight-attachment");
+        }else {
+            pluginIcon.classList.remove("highlight-attachment");
+        }
     }
 }
