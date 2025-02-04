@@ -238,7 +238,4 @@ export class VideoCreator {
         await this.commandsEditor.deleteCommand("compileVideo");
         this.invalidate();
     }
-    closeModal(button){
-        assistOS.UI.closeModal(this.element);
-    }
 }

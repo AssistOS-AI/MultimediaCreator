@@ -1,36 +1,67 @@
 {
-  "applicationName":"VideoCreator",
-  "version": "0.0.1",
-  "entryPointComponent": "video-creator",
-  "description": "Create Videos",
-  "componentsDirPath": "web-components",
-  "components":[
-    {
-      "name": "video-creator",
-      "presenterClassName": "VideoCreator",
-      "type": "modals"
+    "applicationName": "VideoCreator",
+    "version": "0.0.1",
+    "entryPointComponent": "video-creator",
+    "description": "Create Videos",
+    "componentsDirPath": "web-components",
+    "components": [
+        {
+            "name": "video-creator",
+            "presenterClassName": "VideoCreator",
+            "type": "modals"
+        }
+    ],
+    "services": [
+        {
+            "serviceName": "RoutingService",
+            "servicePath": "services/RoutingService.js"
+        }
+    ],
+    "manager": {
+        "path": "manager.js",
+        "name": "Manager"
+    },
+    "plugins": {
+        "document": [
+            {
+                "name": "Video Preview",
+                "componentName": "document-video-preview",
+                "icon": "/assets/icons/preview.svg",
+                "presenterClassName": "DocumentVideoPreview",
+                "type": "component"
+            }
+        ],
+        "abstract": [],
+        "paragraph": [
+            {
+                "name": "Video Preview",
+                "componentName": "paragraph-video-preview",
+                "icon": "/assets/icons/preview.svg",
+                "presenterClassName": "ParagraphVideoPreview",
+                "type": "component"
+            },
+            {
+                "name": "Video Creator",
+                "componentName": "video-creator",
+                "icon": "/assets/icons/video.svg",
+                "presenterClassName": "VideoCreator",
+                "type": "component"
+            },
+            {
+                "name": "Audio Creator",
+                "componentName": "audio-creator",
+                "icon": "/assets/icons/audio.svg",
+                "presenterClassName": "AudioCreator",
+                "type": "component"
+            },
+            {
+                "name": "Image Creator",
+                "componentName": "image-creator",
+                "icon": "/assets/icons/image.svg",
+                "presenterClassName": "ImageCreator",
+                "type": "component"
+            }
+        ]
     }
-  ],
-  "services": [
-    {
-      "serviceName": "RoutingService",
-      "servicePath": "services/RoutingService.js"
-    }
-  ],
-  "manager": {
-    "path": "manager.js",
-    "name": "Manager"
-  },
-  "plugins": {
-    "abstract": [],
-    "paragraph": [
-      {
-        "name": "Video Creator",
-        "componentName": "video-creator",
-        "icon": "/assets/icons/video.svg",
-        "presenterClassName": "VideoCreator"
-      }
-    ]
-  }
 }
 
