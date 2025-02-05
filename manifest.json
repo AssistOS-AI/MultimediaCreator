@@ -44,6 +44,8 @@
                 "tooltip": "Video Creator",
                 "component": "video-creator",
                 "icon": "assets/icons/video.svg",
+                "iconPresenter": "SimpleStateIcon",
+                "iconComponent": "simple-state-icon",
                 "presenter": "VideoCreator",
                 "type": "embedded"
             },
@@ -51,6 +53,8 @@
                 "tooltip": "Audio Creator",
                 "component": "audio-creator",
                 "icon": "assets/icons/audio.svg",
+                "iconPresenter": "SimpleStateIcon",
+                "iconComponent": "simple-state-icon",
                 "presenter": "AudioCreator",
                 "type": "embedded"
             },
@@ -58,6 +62,8 @@
                 "tooltip": "Image Creator",
                 "component": "image-creator",
                 "icon": "assets/icons/image.svg",
+                "iconPresenter": "SimpleStateIcon",
+                "iconComponent": "simple-state-icon",
                 "presenter": "ImageCreator",
                 "type": "embedded"
             }
