@@ -20,7 +20,8 @@ export class AudioCreator {
         this.commands = this.paragraph.commands;
         this.invalidate(async () => {
             this.personalities = await personalityModule.getPersonalities(assistOS.space.id);
-
+            await pluginUtils.loadPluginComponent("MultimediaCreator", "effect-item", "EffectItem");
+            await pluginUtils.loadPluginComponent("MultimediaCreator", "edit-effect-modal", "EditEffectModal");
         });
         this.element.classList.add("maintain-focus");
     }
