@@ -24,42 +24,42 @@
     "plugins": {
         "document": [
             {
-                "name": "Video Preview",
-                "componentName": "document-video-preview",
+                "tooltip": "Video Preview",
+                "component": "document-video-preview",
                 "icon": "assets/icons/preview.svg",
-                "presenterClassName": "DocumentVideoPreview",
-                "type": "component"
+                "presenter": "DocumentVideoPreview",
+                "type": "embedded"
             }
         ],
         "abstract": [],
         "paragraph": [
             {
-                "name": "Video Preview",
-                "componentName": "paragraph-video-preview",
+                "tooltip": "Video Preview",
+                "component": "paragraph-video-preview",
                 "icon": "assets/icons/preview.svg",
-                "presenterClassName": "ParagraphVideoPreview",
-                "type": "component"
+                "presenter": "ParagraphVideoPreview",
+                "type": "embedded"
             },
             {
-                "name": "Video Creator",
-                "componentName": "video-creator",
+                "tooltip": "Video Creator",
+                "component": "video-creator",
                 "icon": "assets/icons/video.svg",
-                "presenterClassName": "VideoCreator",
-                "type": "component"
+                "presenter": "VideoCreator",
+                "type": "embedded"
             },
             {
-                "name": "Audio Creator",
-                "componentName": "audio-creator",
+                "tooltip": "Audio Creator",
+                "component": "audio-creator",
                 "icon": "assets/icons/audio.svg",
-                "presenterClassName": "AudioCreator",
-                "type": "component"
+                "presenter": "AudioCreator",
+                "type": "embedded"
             },
             {
-                "name": "Image Creator",
-                "componentName": "image-creator",
+                "tooltip": "Image Creator",
+                "component": "image-creator",
                 "icon": "assets/icons/image.svg",
-                "presenterClassName": "ImageCreator",
-                "type": "component"
+                "presenter": "ImageCreator",
+                "type": "embedded"
             }
         ]
     }
