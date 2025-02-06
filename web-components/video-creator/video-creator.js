@@ -36,13 +36,6 @@ export class VideoCreator {
             await this.initViewVideo();
             this.initInputs();
         }
-        lipSyncCheckbox.addEventListener("change", async () => {
-            if(lipSyncCheckbox.checked){
-                await this.insertLipSync();
-            }else{
-                await this.commandsEditor.deleteCommand("lipsync");
-            }
-        });
         if(!commands.video && !commands.image){
             let warnMessage = `No visual source added`;
             this.showLipSyncWarning(warnMessage);
@@ -66,6 +59,16 @@ export class VideoCreator {
             deleteCompileButton.classList.add("hidden");
             downloadButton.classList.add("hidden");
         }
+    }
+    async toggleLipSync(checkbox){
+        if(checkbox.checked){
+            await this.insertLipSync();
+            checkbox.checked = true;
+        }else{
+            await this.commandsEditor.deleteCommand("lipsync");
+            checkbox.checked = false;
+        }
+
     }
     showLipSyncWarning(message){
         let warning = `
