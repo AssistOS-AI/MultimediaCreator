@@ -14,7 +14,6 @@ export class VideoCreator {
         let context = pluginUtils.getContext(this.element);
         this.paragraphId = context.paragraphId;
         this.paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
-        this.videoPresenter = this.paragraphPresenter.videoPresenter;
         this.commandsEditor = this.paragraphPresenter.commandsEditor;
         let pluginIconContainer = this.paragraphPresenter.element.querySelector(".plugin-circle.video-creator");
         let pluginIcon = pluginIconContainer.querySelector("simple-state-icon");
@@ -206,9 +205,7 @@ export class VideoCreator {
         this.paragraphPresenter.paragraph.commands.video.volume = parseFloat(volumeInput.value);
         await documentModule.updateParagraphCommands(assistOS.space.id, this.paragraphPresenter._document.id, this.paragraphPresenter.paragraph.id, this.paragraphPresenter.paragraph.commands);
         this.paragraphPresenter.checkVideoAndAudioDuration();
-        this.videoPresenter.setVideoPreviewDuration();
         await this.commandsEditor.invalidateCompiledVideos();
-        this.commandsEditor.videoPresenter.refreshVideoPreview();
         targetElement.classList.add("hidden");
     }
     async compileVideo(){
