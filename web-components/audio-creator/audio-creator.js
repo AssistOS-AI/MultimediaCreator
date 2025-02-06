@@ -18,6 +18,9 @@ export class AudioCreator {
         this.commandsEditor = this.paragraphPresenter.commandsEditor;
         this.paragraph = chapter.paragraphs.find(paragraph => paragraph.id === this.paragraphId);
         this.commands = this.paragraph.commands;
+        let pluginIconContainer = this.paragraphPresenter.element.querySelector(".plugin-circle.audio-creator");
+        let pluginIcon = pluginIconContainer.querySelector("simple-state-icon");
+        this.iconPresenter = pluginIcon.webSkelPresenter;
         this.invalidate(async () => {
             this.personalities = await personalityModule.getPersonalities(assistOS.space.id);
             await pluginUtils.loadPluginComponent("MultimediaCreator", "effect-item", "EffectItem");
@@ -193,12 +196,14 @@ export class AudioCreator {
         let audioId = await this.commandsEditor.insertAttachmentCommand("audio");
         if(audioId){
             this.changeIconState("on");
+            this.iconPresenter.highlightIcon();
             this.invalidate();
         }
     }
     async deleteAudio(){
         await this.commandsEditor.deleteCommand("audio");
         this.changeIconState("off");
+        this.iconPresenter.removeHighlight();
         this.invalidate();
     }
     async deleteSpeech(){

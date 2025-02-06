@@ -16,6 +16,9 @@ export class VideoCreator {
         this.paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
         this.videoPresenter = this.paragraphPresenter.videoPresenter;
         this.commandsEditor = this.paragraphPresenter.commandsEditor;
+        let pluginIconContainer = this.paragraphPresenter.element.querySelector(".plugin-circle.video-creator");
+        let pluginIcon = pluginIconContainer.querySelector("simple-state-icon");
+        this.iconPresenter = pluginIcon.webSkelPresenter;
         this.element.classList.add("maintain-focus");
         this.invalidate();
     }
@@ -27,9 +30,6 @@ export class VideoCreator {
         let deleteVideoButton = this.element.querySelector(".delete-video");
         let lipSyncCheckbox = this.element.querySelector("#lip-sync");
         let commands = this.paragraphPresenter.paragraph.commands;
-        let pluginIconContainer = this.paragraphPresenter.element.querySelector(".plugin-circle.video-creator");
-        let pluginIcon = pluginIconContainer.querySelector("simple-state-icon");
-        this.iconPresenter = pluginIcon.webSkelPresenter;
         if(commands.video){
             viewVideoSection.classList.remove("hidden");
             deleteVideoButton.classList.remove("hidden");
@@ -159,7 +159,6 @@ export class VideoCreator {
             this.invalidate();
             this.iconPresenter.highlightIcon();
         }
-        //this.toggleAttachmentsPreviewIcon();
     }
     async deleteVideo(){
         await this.commandsEditor.deleteCommand("video");
@@ -170,7 +169,6 @@ export class VideoCreator {
             }
         }
         this.iconPresenter.removeHighlight();
-        //this.toggleAttachmentsPreviewIcon();
         this.invalidate();
     }
     async insertVideoSource(commands){
@@ -246,16 +244,5 @@ export class VideoCreator {
     async deleteCompiledVideo(){
         await this.commandsEditor.deleteCommand("compileVideo");
         this.invalidate();
-    }
-    toggleAttachmentsPreviewIcon(){
-        let iconsContainer = this.paragraphPresenter.element.querySelector(".preview-icons");
-        let videoIcon = iconsContainer.querySelector(".has-video-icon");
-        if(videoIcon){
-            videoIcon.remove();
-        } else {
-            let iconSrc = `/applications/files/${assistOS.space.id}/MultimediaCreator/assets/icons/video.svg`;
-            let iconHTML = `<img src="${iconSrc}" alt="video">`;
-            iconsContainer.insertAdjacentHTML("afterbegin", iconHTML);
-        }
     }
 }

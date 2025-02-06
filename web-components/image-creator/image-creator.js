@@ -14,6 +14,9 @@ export class ImageCreator{
         this.paragraphPresenter = documentPresenter.element.querySelector(`paragraph-item[data-paragraph-id="${this.paragraphId}"]`).webSkelPresenter;
         this.commandsEditor = this.paragraphPresenter.commandsEditor;
         this.element.classList.add("maintain-focus");
+        let pluginIconContainer = this.paragraphPresenter.element.querySelector(".plugin-circle.image-creator");
+        let pluginIcon = pluginIconContainer.querySelector("simple-state-icon");
+        this.iconPresenter = pluginIcon.webSkelPresenter;
         this.invalidate();
     }
     async beforeRender(){
@@ -33,12 +36,14 @@ export class ImageCreator{
         let imageId = await this.commandsEditor.insertAttachmentCommand("image");
         if(imageId){
             this.changeIconState("on");
+            this.iconPresenter.highlightIcon();
             this.invalidate();
         }
     }
     async deleteImage() {
         await this.commandsEditor.deleteCommand("image");
         this.changeIconState("off");
+        this.iconPresenter.removeHighlight();
         this.invalidate();
     }
     changeIconState(state){
