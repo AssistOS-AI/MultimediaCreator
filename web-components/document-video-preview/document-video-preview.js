@@ -7,9 +7,10 @@ export class DocumentVideoPreview {
     constructor(element, invalidate) {
         this.element = element;
         this.invalidate = invalidate;
-        this.parentPresenter = this.element.closest("document-view-page").webSkelPresenter;
-        this.document = this.parentPresenter._document;
-        this.element.classList.add("minimized")
+        this.documentPresenter = this.element.closest("document-view-page").webSkelPresenter;
+        this.document = this.documentPresenter._document;
+        this.element.classList.add("minimized");
+        this.pluginIcon = this.documentPresenter.element.querySelector(".plugin-circle.document-video-preview");
         this.invalidate(async () => {
             this.videoLength = await documentModule.estimateDocumentVideoLength(assistOS.space.id, this.document.id);
         });
@@ -18,7 +19,7 @@ export class DocumentVideoPreview {
     beforeRender() {
         //open chapters if they are closed
         for (let chapter of this.document.chapters) {
-            let chapterPresenter = this.parentPresenter.element.querySelector(`[data-chapter-id="${chapter.id}"]`).webSkelPresenter;
+            let chapterPresenter = this.documentPresenter.element.querySelector(`[data-chapter-id="${chapter.id}"]`).webSkelPresenter;
             if (chapterPresenter.chapter.visibility === "hide") {
                 chapterPresenter.changeChapterVisibility("show");
             }
@@ -81,7 +82,7 @@ export class DocumentVideoPreview {
         this.setPlayNextHandler(currentParagraph.commands);
         this.setCurrentParagraphAndChapter(0, 0);
         this.loadResource("image", blackScreen);
-        this.parentPresenter.toggleEditingState(false);
+        this.documentPresenter.toggleEditingState(false);
 
         this.chapterAudioLoaded = true;
         this.imageLoaded = true;
@@ -321,12 +322,13 @@ export class DocumentVideoPreview {
     }
 
     closePlayer() {
-        this.parentPresenter.toggleEditingState(true);
+        this.documentPresenter.toggleEditingState(true);
         this.audioPlayer.pause();
         this.videoPlayer.pause();
         this.chapterAudioPlayer.pause();
         this.cancelTimeouts();
         this.element.remove();
+        this.pluginIcon.classList.remove("document-highlight-plugin");
     }
 
     async playPause(targetElement) {
@@ -335,13 +337,13 @@ export class DocumentVideoPreview {
         if (mode === "pause") {
             imgTag = `<img class="pointer" src="./wallet/assets/icons/pause.svg" alt="pause">`;
             mode = "play";
-            this.parentPresenter.toggleEditingState(false);
+            this.documentPresenter.toggleEditingState(false);
             await this.resumeVideo();
         } else if (mode === "play") {
             imgTag = `<img class="pointer" src="./wallet/assets/icons/play.svg" alt="play">`;
             this.pauseVideoPreview();
             mode = "pause";
-            this.parentPresenter.toggleEditingState(true);
+            this.documentPresenter.toggleEditingState(true);
         } else if (mode === "reload" || mode === "playFromBeginning") {
             imgTag = `<img class="pointer" src="./wallet/assets/icons/pause.svg" alt="pause">`;
             mode = "play";
@@ -513,7 +515,7 @@ export class DocumentVideoPreview {
         playButton.innerHTML = `<img class="pointer" src="./wallet/assets/icons/refresh.svg" alt="reload">`;
         this.isPaused = false;
         this.chapterAudioPlayer.pause();
-        this.parentPresenter.toggleEditingState(true);
+        this.documentPresenter.toggleEditingState(true);
         this.nextButton.classList.add("disabled");
         this.currentTime = this.videoLength;
         //end of the player changes the time to 0
@@ -893,7 +895,7 @@ export class DocumentVideoPreview {
     scrollDocument() {
         let chapter = this.document.chapters[this.chapterIndex];
         let paragraph = chapter.paragraphs[this.paragraphIndex];
-        let currentParagraph = this.parentPresenter.element.querySelector(`[data-paragraph-id="${paragraph.id}"]`);
+        let currentParagraph = this.documentPresenter.element.querySelector(`[data-paragraph-id="${paragraph.id}"]`);
         if (!currentParagraph) {
             return;
         }
