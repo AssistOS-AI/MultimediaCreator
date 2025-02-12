@@ -21,28 +21,36 @@ export class SimpleStateIcon{
     afterRender(){
         if(this.pluginMap[this.plugin] && this.paragraph.commands[this.pluginMap[this.plugin]]){
             this.highlightIcon();
+        } else {
+            this.removeHighlight();
         }
     }
 
     highlightIcon(){
         let pluginContainer = this.element.closest(".plugin-circle");
         pluginContainer.classList.add("highlight-attachment");
-        this.toggleAttachmentsPreviewIcon();
+        this.highlightPreviewIcon();
     }
     removeHighlight(){
         let pluginContainer = this.element.closest(".plugin-circle");
         pluginContainer.classList.remove("highlight-attachment");
-        this.toggleAttachmentsPreviewIcon();
+        this.removeHighlightPreviewIcon();
     }
-    toggleAttachmentsPreviewIcon(){
+    highlightPreviewIcon(){
+        let iconsContainer = this.paragraphPresenter.element.querySelector(".preview-icons");
+        let attachmentType = this.pluginMap[this.plugin];
+        let attachmentIcon = iconsContainer.querySelector(`.preview-icon.has-${attachmentType}-icon`);
+        if(!attachmentIcon){
+            let iconHTML = `<img src="${this.iconURL}" alt="${attachmentType}" class="preview-icon has-${attachmentType}-icon">`;
+            iconsContainer.insertAdjacentHTML("afterbegin", iconHTML);
+        }
+    }
+    removeHighlightPreviewIcon(){
         let iconsContainer = this.paragraphPresenter.element.querySelector(".preview-icons");
         let attachmentType = this.pluginMap[this.plugin];
         let attachmentIcon = iconsContainer.querySelector(`.preview-icon.has-${attachmentType}-icon`);
         if(attachmentIcon){
             attachmentIcon.remove();
-        } else {
-            let iconHTML = `<img src="${this.iconURL}" alt="${attachmentType}" class="preview-icon has-${attachmentType}-icon">`;
-            iconsContainer.insertAdjacentHTML("afterbegin", iconHTML);
         }
     }
 }
