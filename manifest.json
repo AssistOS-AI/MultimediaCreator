@@ -67,6 +67,15 @@
                 "presenter": "ImageCreator",
                 "type": "embedded"
             }
+        ],
+        "chapter": [
+            {
+            "tooltip": "Chapter Audio",
+            "component": "chapter-audio",
+            "icon": "assets/icons/chapter-audio.svg",
+            "presenter": "ChapterAudio",
+            "type": "modal"
+            }
         ]
     }
 }
